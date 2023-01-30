@@ -10,6 +10,7 @@ public class Main {
                 "желтый",
                 2015,
                 "Россия",
+                180,
                 "АКП",
                 "седан",
                 "А357МР97",
@@ -18,7 +19,12 @@ public class Main {
                 new Car.Key(true, true));
         System.out.println(car1);
 
-
-
+        Bus bus1 = new Bus("ЛИАЗ",
+                "677",
+                1967,
+                "СССР",
+                "Желтый",
+                60);
+        System.out.println(bus1);
     }
 }

@@ -1,12 +1,7 @@
 package transport;
 
-public class Car {
-    final private String brand;
-    final private String model;
+public class Car extends Transport{
     private double engineVolume;
-    private String color;
-    final private int year;
-    final private String country;
     private String transmission;
     final private String bodyType;
     private String registrationNumber;
@@ -20,18 +15,15 @@ public class Car {
                String color,
                int year,
                String country,
+               int maxSpeed,
                String transmission,
                String bodyType,
                String registrationNumber,
                int numberOfSeats,
                boolean isSummerRubber,
                Key key) {
-        this.brand = (brand != null && brand.isEmpty() != true && brand.isBlank() != true) ? brand : "Default";
-        this.model = (model != null && model.isEmpty() != true && model.isBlank() != true) ? model : "Default";
+        super(brand, model, year, country, color, maxSpeed);
         this.engineVolume = (engineVolume > 0) ? engineVolume : 1.5;
-        this.color = (color != null && color.isEmpty() != true && color.isBlank() != true) ? model : "белый";
-        this.year = (year > 0) ? year : 2000;
-        this.country = (country != null && country.isEmpty() != true && country.isBlank() != true) ? country : "Default";
         this.transmission = (transmission != null && transmission.isEmpty() != true && transmission.isBlank() != true) ? transmission : "Default";;
         this.bodyType = (bodyType != null && bodyType.isEmpty() != true && bodyType.isBlank() != true) ? bodyType : "Default";;
         this.registrationNumber = (registrationNumber != null && registrationNumber.isEmpty() != true && registrationNumber.isBlank() != true) ? registrationNumber : "Default";;
@@ -51,18 +43,9 @@ public class Car {
 
         @Override
         public String toString() {
-            return "Удаленный запуск двигателя - " + remoteStart +
+            return "удаленный запуск двигателя - " + remoteStart +
                     ", бесключевой доступ - " + keylessEntry;
         }
-    }
-
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
     }
 
     public double getEngineVolume() {
@@ -71,22 +54,6 @@ public class Car {
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = engineVolume;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getCountry() {
-        return country;
     }
 
     public String getTransmission() {
@@ -132,19 +99,13 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", engineVolume=" + engineVolume +
-                ", color='" + color + '\'' +
-                ", year=" + year +
-                ", country='" + country + '\'' +
-                ", transmission='" + transmission + '\'' +
-                ", bodyType='" + bodyType + '\'' +
-                ", registrationNumber='" + registrationNumber + '\'' +
-                ", numberOfSeats=" + numberOfSeats +
-                ", isSummerRubber=" + isSummerRubber +
-                ", key=" + key +
-                '}';
+        return super.toString() + ", " +
+                "объем двигаеля в литрах: " + engineVolume + ", " +
+                "коробка передач: " + transmission + ", " +
+                "тип кузова: " + bodyType + ", " +
+                "регистрационный номер: " + registrationNumber + ", " +
+                "количество мест: " + numberOfSeats + ", " +
+                (isSummerRubber ? "летняя" : "зимняя") + " резина"+ ", " +
+                key;
     }
 }
