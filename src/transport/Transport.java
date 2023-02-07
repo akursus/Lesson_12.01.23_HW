@@ -1,34 +1,27 @@
 package transport;
 
-public class Transport {
+public abstract class Transport <T extends Drive> implements Competition{
     private final String brand;
     private final String model;
-    private final int year;
-    private final String country;
-    private String color;
-    private int maxSpeed;
+    private double engineCapacity;
+    private T drive;
 
     public Transport(String brand,
                      String model,
-                     int year,
-                     String country,
-                     String color,
-                     int maxSpeed) {
+                     double engineCapacity,
+                     T drive) {
         if (brand == null || brand.isEmpty() || brand.isBlank()) {
             brand = "default";
         }
         this.brand = brand;
+
         if (model == null || model.isEmpty() || model.isBlank()) {
             model = "default";
         }
         this.model = model;
-        this.year = (year > 0) ? year : 2000;
-        if (country == null || country.isEmpty() || country.isBlank()) {
-            country = "default";
-        }
-        this.country = country;
-        setColor(color);
-        setMaxSpeed(maxSpeed);
+
+        setEngineCapacity(engineCapacity);
+        setDrive(drive);
     }
 
     public String getBrand() {
@@ -39,44 +32,32 @@ public class Transport {
         return model;
     }
 
-    public int getYear() {
-        return year;
+    public double getEngineCapacity() {
+        return engineCapacity;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        if (color == null || color.isEmpty() || color.isBlank()) {
-            color = "белый";
+    public void setEngineCapacity(double engineCapacity) {
+        if (engineCapacity <= 0) {
+            engineCapacity = 1.6;
         }
-        this.color = color;
+        this.engineCapacity = engineCapacity;
     }
 
-    public int getMaxSpeed() {
-        return maxSpeed;
+    public T getDrive() {
+        return drive;
     }
 
-    public void setMaxSpeed(int maxSpeed) {
-        if (maxSpeed <= 0) {
-            maxSpeed = 150;
-        }
-        this.maxSpeed = maxSpeed;
+    public void setDrive(T drive) {
+        this.drive = drive;
     }
 
+    public abstract void startMove ();
+    public abstract void finishMove ();
     @Override
     public String toString() {
         return "Марка: " + brand + ", " +
                 "модель: " + model + ", " +
-                "год выпуска: " + year + ", " +
-                "страна сборки: " + country + ", " +
-                "цвет кузова: " + color + ", " +
-                "максимальная скорость: " + maxSpeed;
+                "объём двигателя: " + engineCapacity;
     }
 }
 
