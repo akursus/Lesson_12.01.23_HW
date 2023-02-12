@@ -1,11 +1,34 @@
 package transport;
 
 public class Car extends Transport<DriveB> {
+
+    public enum BodyType {
+        TYPE1("Седан"),
+        TYPE2("Хетчбэк"),
+        TYPE3("Купе"),
+        TYPE4("Универсал"),
+        TYPE5("Внедорожник"),
+        TYPE6("Кроссовер"),
+        TYPE7("Пикап"),
+        TYPE8("Фургон"),
+        TYPE9("Минивэн");
+
+        private String name;
+        BodyType (String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Тип кузова: " + name;
+        }
+    }
+
     public Car(String brand,
                String model,
                double engineCapacity,
-               DriveB drive) {
-        super(brand, model, engineCapacity, drive);
+               DriveB drive, Type type) {
+        super(brand, model, engineCapacity, drive, type);
     }
 
     @Override

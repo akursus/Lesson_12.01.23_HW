@@ -1,11 +1,40 @@
 package transport;
 
 public class Truck extends Transport<DriverC> {
+
+    public enum LoadСapacity{
+        N1 (3.2F),
+        N2 (10.7F),
+        N3 (12.7F);
+        private float range;
+
+        LoadСapacity(float range) {
+            this.range = range;
+        }
+
+        @Override
+        public String toString() {
+            if (0.0F <= range && range <= 3.5F){
+                return "Грузоподъемность: от 0 тонн до 3.5 тонн";
+            }
+            if (3.5F < range && range <= 12F){
+                return "Грузоподъемность: от 3.5 тонн до 12 тонн";
+            }
+            if (12F < range && range <= 26F){
+                return "Грузоподъемность: от 12 тонн до 26 тонн";
+            }
+            else {
+                return "Грузоподъемность: не соответствует грузоподьемности транспорта";
+            }
+        }
+    }
+
+
     public Truck(String brand,
                  String model,
                  double engineCapacity,
-                 DriverC drive) {
-        super(brand, model, engineCapacity, drive);
+                 DriverC drive, Type type) {
+        super(brand, model, engineCapacity, drive, type);
     }
 
     @Override

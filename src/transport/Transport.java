@@ -5,11 +5,12 @@ public abstract class Transport <T extends Drive> implements Competition{
     private final String model;
     private double engineCapacity;
     private T drive;
+    Type type;
 
     public Transport(String brand,
                      String model,
                      double engineCapacity,
-                     T drive) {
+                     T drive, Type type) {
         if (brand == null || brand.isEmpty() || brand.isBlank()) {
             brand = "default";
         }
@@ -22,6 +23,11 @@ public abstract class Transport <T extends Drive> implements Competition{
 
         setEngineCapacity(engineCapacity);
         setDrive(drive);
+        this.type = type;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public String getBrand() {
@@ -59,6 +65,15 @@ public abstract class Transport <T extends Drive> implements Competition{
                 "модель: " + model + ", " +
                 "объём двигателя: " + engineCapacity;
     }
+    public void printType(){
+        if (type == Type.CAR || type == Type.BUS || type == Type.TRUCK){
+            System.out.println(type);
+        }
+        else {
+            System.out.println("Данных по транспортному средству недостаточно");
+        }
+    }
+
 }
 
 
