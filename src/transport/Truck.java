@@ -1,40 +1,50 @@
 package transport;
 
 public class Truck extends Transport<DriverC> {
+    public LoadСapacity loadСapacity;
+    public enum LoadСapacity {
+        N1 (0.0F, 3.5F),
+        N2 (3.6F, 12F),
+        N3 (12.1F, 26F);
+        private float min;
+        private float max;
 
-    public enum LoadСapacity{
-        N1 (3.2F),
-        N2 (10.7F),
-        N3 (12.7F);
-        private float range;
-
-        LoadСapacity(float range) {
-            this.range = range;
+        LoadСapacity(float min, float max) {
+            this.min = min;
+            this.max = max;
         }
 
-        @Override
-        public String toString() {
-            if (0.0F <= range && range <= 3.5F){
-                return "Грузоподъемность: от 0 тонн до 3.5 тонн";
-            }
-            if (3.5F < range && range <= 12F){
-                return "Грузоподъемность: от 3.5 тонн до 12 тонн";
-            }
-            if (12F < range && range <= 26F){
-                return "Грузоподъемность: от 12 тонн до 26 тонн";
-            }
-            else {
-                return "Грузоподъемность: не соответствует грузоподьемности транспорта";
-            }
+        public float getMin() {
+            return min;
         }
+
+        public float getMax() {
+            return max;
+        }
+
+        public static LoadСapacity getValue(float value) {
+            for (LoadСapacity e : LoadСapacity.values()) {
+                if (value >= e.getMin() && value <= e.getMax()) {
+                    System.out.println(e);
+                    return e;
+                }
+            }
+            return null;
+        }
+
     }
 
-
-    public Truck(String brand,
-                 String model,
-                 double engineCapacity,
-                 DriverC drive, Type type) {
+    public Truck(String brand, String model, double engineCapacity, DriverC drive, Type type, LoadСapacity loadСapacity) {
         super(brand, model, engineCapacity, drive, type);
+        this.loadСapacity = loadСapacity;
+    }
+
+    public LoadСapacity getLoadСapacity() {
+        return loadСapacity;
+    }
+
+    public void setLoadСapacity(LoadСapacity loadСapacity) {
+        this.loadСapacity = loadСapacity;
     }
 
     @Override
@@ -65,5 +75,13 @@ public class Truck extends Transport<DriverC> {
         int maxLimit = 150;
         int maxSpeed = (int) (minLimit + (maxLimit - minLimit)*Math.random());
         System.out.println("Максимальная скорость грузовика: " + maxSpeed + "км/ч");
+    }
+
+    public void printType() {
+        if (getLoadСapacity() == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println(getLoadСapacity());
+        }
     }
 }

@@ -1,49 +1,52 @@
 package transport;
 
 public class Bus extends Transport<DriverD> {
+    public Сapacity сapacity;
     public enum Сapacity{
-        N1 (7),
-        N2 (12),
-        N3 (27),
-        N4 (77),
-        N5 (111),
-        N6 (123);
-        private int range;
+        N1 (0, 10),
+        N2 (11, 25),
+        N3 (26, 50),
+        N4 (51, 80),
+        N5 (81, 120);
 
-        Сapacity(int range) {
-            this.range = range;
+        private int min;
+        private int max;
+
+        Сapacity(int min, int max) {
+            this.min = min;
+            this.max = max;
         }
 
-        @Override
-        public String toString() {
-            if (0 <= range && range <= 10){
-                return "Вместимость: от 0 до 10 человек";
+        public int getMin() {
+            return min;
+        }
+
+        public int getMax() {
+            return max;
+        }
+
+        public static Сapacity getValue(int value) {
+            for (Сapacity e : Сapacity.values()) {
+                if (value >= e.getMin() && value <= e.getMax()) {
+                    System.out.println(e);
+                    return e;
+                }
             }
-            if (10 < range && range <= 25){
-                return "Вместимость: от 11 до 25 человек";
-            }
-            if (25 < range && range <= 50){
-                return "Вместимость: от 26 до 50 человек";
-            }
-            if (50 < range && range <= 80){
-                return "Вместимость: от 51 до 80 человек";
-            }
-            if (80 < range && range <= 120){
-                return "Вместимость: от 81 до 120 человек";
-            }
-            else {
-                return "Необходимо несколько автобусов";
-            }
+            return null;
         }
     }
 
-
-
-    public Bus(String brand,
-               String model,
-               double engineCapacity,
-               DriverD drive, Type type) {
+    public Bus(String brand, String model, double engineCapacity, DriverD drive, Type type, Сapacity сapacity) {
         super(brand, model, engineCapacity, drive, type);
+        this.сapacity = сapacity;
+    }
+
+    public Сapacity getСapacity() {
+        return сapacity;
+    }
+
+    public void setСapacity(Сapacity сapacity) {
+        this.сapacity = сapacity;
     }
 
     @Override
@@ -75,5 +78,13 @@ public class Bus extends Transport<DriverD> {
         int maxLimit = 120;
         int maxSpeed = (int) (minLimit + (maxLimit - minLimit)*Math.random());
         System.out.println("Максимальная скорость автобуса: " + maxSpeed + "км/ч");
+    }
+
+    public void printType() {
+        if (getСapacity() == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println(getСapacity());
+        }
     }
 }
