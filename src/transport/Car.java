@@ -1,11 +1,45 @@
 package transport;
 
 public class Car extends Transport<DriveB> {
+public BodyType bodyType;
+    public enum BodyType {
+        TYPE1("Седан"),
+        TYPE2("Хетчбэк"),
+        TYPE3("Купе"),
+        TYPE4("Универсал"),
+        TYPE5("Внедорожник"),
+        TYPE6("Кроссовер"),
+        TYPE7("Пикап"),
+        TYPE8("Фургон"),
+        TYPE9("Минивэн");
+
+        private String name;
+        BodyType (String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Тип кузова: " + name;
+        }
+    }
+
     public Car(String brand,
                String model,
                double engineCapacity,
-               DriveB drive) {
-        super(brand, model, engineCapacity, drive);
+               DriveB drive,
+               Type type,
+               BodyType bodyType) {
+        super(brand, model, engineCapacity, drive, type);
+        this.bodyType = bodyType;
+    }
+
+    public BodyType getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(BodyType bodyType) {
+        this.bodyType = bodyType;
     }
 
     @Override
@@ -38,4 +72,11 @@ public class Car extends Transport<DriveB> {
         System.out.println("Максимальная скорость легкового автомобиля: " + maxSpeed + "км/ч");
     }
 
+    public void printType() {
+        if (getBodyType() == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println(getBodyType());
+        }
+    }
 }

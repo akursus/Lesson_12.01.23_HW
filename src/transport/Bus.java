@@ -1,11 +1,52 @@
 package transport;
 
 public class Bus extends Transport<DriverD> {
-    public Bus(String brand,
-               String model,
-               double engineCapacity,
-               DriverD drive) {
-        super(brand, model, engineCapacity, drive);
+    public Сapacity сapacity;
+    public enum Сapacity{
+        N1 (0, 10),
+        N2 (11, 25),
+        N3 (26, 50),
+        N4 (51, 80),
+        N5 (81, 120);
+
+        private int min;
+        private int max;
+
+        Сapacity(int min, int max) {
+            this.min = min;
+            this.max = max;
+        }
+
+        public int getMin() {
+            return min;
+        }
+
+        public int getMax() {
+            return max;
+        }
+
+        public static Сapacity getValue(int value) {
+            for (Сapacity e : Сapacity.values()) {
+                if (value >= e.getMin() && value <= e.getMax()) {
+                    System.out.println(e);
+                    return e;
+                }
+            }
+            return null;
+        }
+    }
+
+    public Bus(String brand, String model, double engineCapacity, DriverD drive, Type type, Сapacity сapacity) {
+        super(brand, model, engineCapacity, drive, type);
+        this.сapacity = сapacity;
+    }
+
+    public Сapacity getСapacity() {
+        return сapacity;
+    }
+
+    public void setСapacity(Сapacity сapacity) {
+        this.сapacity = сapacity;
     }
 
     @Override
@@ -37,5 +78,13 @@ public class Bus extends Transport<DriverD> {
         int maxLimit = 120;
         int maxSpeed = (int) (minLimit + (maxLimit - minLimit)*Math.random());
         System.out.println("Максимальная скорость автобуса: " + maxSpeed + "км/ч");
+    }
+
+    public void printType() {
+        if (getСapacity() == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println(getСapacity());
+        }
     }
 }
