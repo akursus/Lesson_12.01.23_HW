@@ -6,6 +6,8 @@ public abstract class Transport <T extends Drive> implements Competition{
     private double engineCapacity;
     private T drive;
     Type type;
+    private boolean diagnosticsPassed;
+
 
     public Transport(String brand,
                      String model,
@@ -56,9 +58,13 @@ public abstract class Transport <T extends Drive> implements Competition{
     public void setDrive(T drive) {
         this.drive = drive;
     }
+    public boolean isDiagnosticsPassed() {
+        return diagnosticsPassed;
+    }
 
     public abstract void startMove ();
     public abstract void finishMove ();
+    public abstract boolean passDiagnostics ();
     @Override
     public String toString() {
         return "Марка: " + brand + ", " +

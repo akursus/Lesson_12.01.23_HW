@@ -84,4 +84,8 @@ public class Truck extends Transport<DriverC> {
             System.out.println(getLoadСapacity());
         }
     }
+
+    public boolean passDiagnostics() {
+        return this.isDiagnosticsPassed ();
+    }
 }

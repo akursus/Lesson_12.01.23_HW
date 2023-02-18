@@ -87,4 +87,8 @@ public class Bus extends Transport<DriverD> {
             System.out.println(getСapacity());
         }
     }
+
+    public boolean passDiagnostics() {
+       throw new TransportTypeException ("Автобусы диагностику проходить не должны");
+    }
 }
