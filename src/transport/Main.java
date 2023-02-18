@@ -4,17 +4,6 @@ public class Main {
     private static Enum<Type> printType;
 
     public static void main(String[] args) {
-        Transport<?>transport; printType = Type.BUS;
-            System.out.println(printType);
-
-        Bus.Сapacity сapacity = Bus.Сapacity.N5;
-        System.out.println(сapacity);
-
-        Truck.LoadСapacity loadСapacity = Truck.LoadСapacity.N3;
-        System.out.println(loadСapacity);
-
-        Car.BodyType bodyType = Car.BodyType.TYPE1;
-        System.out.println(bodyType);
 
         DriveB driveB = new DriveB("Иван Падерин", true, 12);
         Car car1 = new Car("Lada",
@@ -24,6 +13,7 @@ public class Main {
                 Type.CAR,
                 Car.BodyType.TYPE1);
         printInfo(car1);
+        car1.printType();
 
         DriverD driverD = new DriverD("Олег Газманов", true, 22);
         Bus bus1 = new Bus("ЛИАЗ",
