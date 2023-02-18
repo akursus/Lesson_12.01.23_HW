@@ -36,8 +36,25 @@ public class Main {
                 "65225", "ЛИАЗ", 6.0, driverC2, Type.TRUCK, Truck.LoadСapacity.getValue(12));
         printInfo(truck2);
         truck2.printType();
+        checkTrasport(car1, truck1, truck2, bus1, null);
     }
     private static void printInfo(Transport<?> transport) {
         System.out.println("Водитель " + transport.getDrive().getName() + " управляет автомобилем " +transport.getBrand() + " и будет участвовать в заезде");
+    }
+
+    public static void checkTrasport (Transport... transports) {
+        int count = 0;
+        for (Transport transport : transports){
+            if (!transport.passDiagnostics()) {
+                try {
+                    throw new RuntimeException(transport.getBrand() + " " + transport.getModel() + " не прошел диагностику!");
+                } catch (RuntimeException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                count++;
+            }
+        }
+        System.out.println("Диагностику прошли" + count + "из" + transports.length + "автомобилей");
     }
 }

@@ -79,4 +79,9 @@ public BodyType bodyType;
             System.out.println(getBodyType());
         }
     }
+
+    @Override
+    public boolean passDiagnostics() {
+        return this.isDiagnosticsPassed ();
+    }
 }
